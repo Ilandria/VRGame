@@ -12,7 +12,7 @@ namespace CCB.MechGame.Editor.Packaging
 		{
 			arguments = new Dictionary<string, string>();
 
-			Regex argRegex = new Regex(@"-[A-Za-z]");
+			Regex argRegex = new Regex(@"^-[A-Za-z]");
 
 			Console.WriteLine("Parsing CLI arguments.");
 			for (int i = 0; i < args.Length; i++)
