@@ -1,4 +1,5 @@
 ﻿using MechGame.Interaction;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 
@@ -19,6 +20,9 @@ namespace MechGame.Input
 		[SerializeField]
 		private XRNode targetNode = XRNode.RightHand;
 
+		[SerializeField]
+		private Interactable[] globalInteractables = null;
+
 		private Interactable currentInteractable;
 		private InputDevice currentInput;
 		private InteractionState currentState;
@@ -26,6 +30,12 @@ namespace MechGame.Input
 		private void OnEnable()
 		{
 			currentState = InteractionState.Idle;
+			currentInput = InputDevices.GetDeviceAtXRNode(targetNode);
+
+			foreach (Interactable interactable in globalInteractables)
+			{
+				interactable.OnBeginInteraction(currentInput);
+			}
 		}
 
 		private void Update()
@@ -35,6 +45,11 @@ namespace MechGame.Input
 			// Rotation tracking isn't needed since we're assuming sphere colliders. This saves a bit of CPU time.
 			currentInput.TryGetFeatureValue(CommonUsages.devicePosition, out Vector3 position);
 			transform.localPosition = position;
+
+			foreach (Interactable interactable in globalInteractables)
+			{
+				interactable.OnInteraction(currentInput);
+			}
 
 			switch (currentState)
 			{
@@ -54,6 +69,16 @@ namespace MechGame.Input
 
 				default:
 					break;
+			}
+		}
+
+		private void OnDisable()
+		{
+			currentInput = InputDevices.GetDeviceAtXRNode(targetNode);
+
+			foreach (Interactable interactable in globalInteractables)
+			{
+				interactable.OnEndInteraction(currentInput);
 			}
 		}
 

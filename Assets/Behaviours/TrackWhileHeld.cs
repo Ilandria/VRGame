@@ -3,7 +3,7 @@ using UnityEngine.XR;
 
 namespace MechGame.Behaviours
 {
-	public class FollowWhenGrabbed : MonoBehaviour
+	public class TrackWhileHeld : MonoBehaviour
 	{
 		private Vector3 grabOffset;
 		private Quaternion rotationOffset;

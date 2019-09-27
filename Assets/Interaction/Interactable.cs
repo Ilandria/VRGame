@@ -3,7 +3,6 @@ using UnityEngine.XR;
 
 namespace MechGame.Interaction
 {
-	[RequireComponent(typeof(Collider))]
 	public class Interactable : MonoBehaviour
 	{
 		public bool IsInUse { get; private set; }
