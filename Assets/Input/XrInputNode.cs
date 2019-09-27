@@ -1,9 +1,9 @@
-﻿using MechGame.Interaction;
-using System.Collections.Generic;
+﻿using CCB.XR.Interaction;
+using CCB.XR.Interaction.Abstraction;
 using UnityEngine;
 using UnityEngine.XR;
 
-namespace MechGame.Input
+namespace CCB.XR.Input
 {
 	[RequireComponent(typeof(Rigidbody))]
 	[RequireComponent(typeof(Collider))]
@@ -21,21 +21,22 @@ namespace MechGame.Input
 		private XRNode targetNode = XRNode.RightHand;
 
 		[SerializeField]
-		private Interactable[] globalInteractables = null;
+		private GlobalInteractable[] globalInteractables = null;
+		private int globalInteractableCount;
 
-		private Interactable currentInteractable;
+		private IInteractableObject currentInteractable;
 		private InputDevice currentInput;
 		private InteractionState currentState;
+
+		private void Awake()
+		{
+			globalInteractableCount = globalInteractables.Length;
+		}
 
 		private void OnEnable()
 		{
 			currentState = InteractionState.Idle;
 			currentInput = InputDevices.GetDeviceAtXRNode(targetNode);
-
-			foreach (Interactable interactable in globalInteractables)
-			{
-				interactable.OnBeginInteraction(currentInput);
-			}
 		}
 
 		private void Update()
@@ -46,9 +47,9 @@ namespace MechGame.Input
 			currentInput.TryGetFeatureValue(CommonUsages.devicePosition, out Vector3 position);
 			transform.localPosition = position;
 
-			foreach (Interactable interactable in globalInteractables)
+			for (int i = 0; i < globalInteractableCount; i++)
 			{
-				interactable.OnInteraction(currentInput);
+				globalInteractables[i].OnGlobalInteraction(currentInput);
 			}
 
 			switch (currentState)
@@ -59,7 +60,7 @@ namespace MechGame.Input
 					break;
 
 				case InteractionState.Continue:
-					currentInteractable.OnInteraction(currentInput);
+					currentInteractable.OnContinueInteraction(currentInput);
 					break;
 
 				case InteractionState.End:
@@ -75,11 +76,6 @@ namespace MechGame.Input
 		private void OnDisable()
 		{
 			currentInput = InputDevices.GetDeviceAtXRNode(targetNode);
-
-			foreach (Interactable interactable in globalInteractables)
-			{
-				interactable.OnEndInteraction(currentInput);
-			}
 		}
 
 		private void OnTriggerEnter(Collider other)
@@ -94,7 +90,7 @@ namespace MechGame.Input
 
 		private void OnTriggerExit(Collider other)
 		{
-			if (currentState != InteractionState.Idle && other.GetComponent<Interactable>() == currentInteractable)
+			if (currentState != InteractionState.Idle && other.GetComponent<IInteractableObject>() == currentInteractable)
 			{
 				currentState = InteractionState.End;
 			}
@@ -104,7 +100,7 @@ namespace MechGame.Input
 		{
 			if (currentState == InteractionState.Idle)
 			{
-				Interactable interactable = other.GetComponent<Interactable>();
+				IInteractableObject interactable = other.GetComponent<IInteractableObject>();
 
 				if (!interactable.IsInUse)
 				{

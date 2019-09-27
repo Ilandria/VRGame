@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.XR;
 
-namespace MechGame.Behaviours
+namespace CCB.XR.Behaviours
 {
 	public class TrackWhileHeld : MonoBehaviour
 	{

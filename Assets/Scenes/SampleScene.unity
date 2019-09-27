@@ -501,10 +501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88113c0335ba1984882b318ac6737a21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onBeginInput:
-    m_PersistentCalls:
-      m_Calls: []
-  onInput:
+  onRaised:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 378279291}
@@ -518,9 +515,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onEndInput:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &903875873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -530,7 +524,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 903875870}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 932a0045e476390428bb5505986dbd98, type: 3}
+  m_Script: {fileID: 11500000, guid: 03c26d9882396a4428694af1eeeb1d52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   interactableLayerName: Interactable
@@ -707,7 +701,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 495d7ddf2d9ad2b47859f54243b6911c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onBeginInput:
+  onBeginGrab:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 120638572}
@@ -721,7 +715,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onInput:
+  onContinueGrab:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 120638572}
@@ -735,7 +729,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onEndInput:
+  onReleaseGrab:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &1067845924
@@ -808,10 +802,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88113c0335ba1984882b318ac6737a21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onBeginInput:
-    m_PersistentCalls:
-      m_Calls: []
-  onInput:
+  onRaised:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1045366792}
@@ -825,9 +816,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onEndInput:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &1078543902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -837,7 +825,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1078543899}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 932a0045e476390428bb5505986dbd98, type: 3}
+  m_Script: {fileID: 11500000, guid: 03c26d9882396a4428694af1eeeb1d52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   interactableLayerName: Interactable

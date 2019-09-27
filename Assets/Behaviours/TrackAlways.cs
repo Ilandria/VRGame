@@ -1,14 +1,17 @@
 ﻿using UnityEngine;
 using UnityEngine.XR;
 
-public class TrackAlways : MonoBehaviour
+namespace CCB.XR.Behaviours
 {
-    public void Track(InputDevice inputDevice)
+	public class TrackAlways : MonoBehaviour
 	{
-		inputDevice.TryGetFeatureValue(CommonUsages.devicePosition, out Vector3 inputPosition);
-		inputDevice.TryGetFeatureValue(CommonUsages.deviceRotation, out Quaternion inputRotation);
+		public void Track(InputDevice inputDevice)
+		{
+			inputDevice.TryGetFeatureValue(CommonUsages.devicePosition, out Vector3 inputPosition);
+			inputDevice.TryGetFeatureValue(CommonUsages.deviceRotation, out Quaternion inputRotation);
 
-		transform.position = inputPosition;
-		transform.rotation = inputRotation;
+			transform.position = inputPosition;
+			transform.rotation = inputRotation;
+		}
 	}
 }
