@@ -3,7 +3,7 @@ using UnityEngine.XR;
 
 namespace CCB.XR.Behaviours
 {
-	public class TrackAlways : MonoBehaviour
+	public class SnapTo : MonoBehaviour
 	{
 		public void Track(InputDevice inputDevice)
 		{

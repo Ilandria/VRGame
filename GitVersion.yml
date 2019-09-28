@@ -1,7 +1,4 @@
 assembly-versioning-scheme: MajorMinor
+assembly-file-versioning-scheme: MajorMinorPatchTag
 mode: Mainline
 increment: Patch
-branches: {}
-ignore:
-  sha: []
-merge-message-formats: {}
