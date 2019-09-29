@@ -11,9 +11,9 @@ namespace CCB.XR.Interaction.Interactions.Global
 	{
 		public InteractionEvent onRaised;
 
-		public void Raise(InputDevice inputDevice)
+		public void Raise(InputDevice inputDevice, Transform inputTransform)
 		{
-			onRaised.Invoke(inputDevice);
+			onRaised.Invoke(inputDevice, inputTransform);
 		}
 	}
 }

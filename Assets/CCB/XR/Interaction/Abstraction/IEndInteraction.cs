@@ -1,9 +1,10 @@
-﻿using UnityEngine.XR;
+﻿using UnityEngine;
+using UnityEngine.XR;
 
 namespace CCB.XR.Interaction.Abstraction
 {
 	public interface IEndInteraction
 	{
-		void Raise(InputDevice inputDevice);
+		void Raise(InputDevice inputDevice, Transform inputTransform);
 	}
 }

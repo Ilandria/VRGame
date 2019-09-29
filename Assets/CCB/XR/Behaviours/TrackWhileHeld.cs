@@ -5,17 +5,14 @@ namespace CCB.XR.Behaviours
 {
 	public class TrackWhileHeld : MonoBehaviour
 	{
-		public void BeginGrab(InputDevice inputDevice)
+		public void BeginGrab(InputDevice inputDevice, Transform inputTransform)
 		{
 
 		}
 
-		public void Hold(InputDevice inputDevice)
+		public void Hold(InputDevice inputDevice, Transform inputTransform)
 		{
-			inputDevice.TryGetFeatureValue(CommonUsages.devicePosition, out Vector3 devicePosition);
-			inputDevice.TryGetFeatureValue(CommonUsages.deviceRotation, out Quaternion deviceRotation);
-			transform.rotation = deviceRotation;
-			transform.position = devicePosition;
+
 		}
 	}
 }

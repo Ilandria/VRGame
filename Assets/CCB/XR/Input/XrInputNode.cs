@@ -39,32 +39,39 @@ namespace CCB.XR.Input
 			currentInput = InputDevices.GetDeviceAtXRNode(targetNode);
 		}
 
-		private void Update()
+		private void EarlyUpdate()
 		{
 			currentInput = InputDevices.GetDeviceAtXRNode(targetNode);
 
-			// Rotation tracking isn't needed since we're assuming sphere colliders. This saves a bit of CPU time.
 			currentInput.TryGetFeatureValue(CommonUsages.devicePosition, out Vector3 position);
+			currentInput.TryGetFeatureValue(CommonUsages.deviceRotation, out Quaternion rotation);
 			transform.localPosition = position;
+			transform.localRotation = rotation;
+		}
 
+		private void Update()
+		{
 			for (int i = 0; i < globalInteractableCount; i++)
 			{
-				globalInteractables[i].OnGlobalInteraction(currentInput);
+				globalInteractables[i].OnGlobalInteraction(currentInput, transform);
 			}
 
 			switch (currentState)
 			{
 				case InteractionState.Begin:
-					currentInteractable.OnBeginInteraction(currentInput);
+					Debug.Log("Begin");
+					currentInteractable.OnBeginInteraction(currentInput, transform);
 					currentState = InteractionState.Continue;
 					break;
 
 				case InteractionState.Continue:
-					currentInteractable.OnContinueInteraction(currentInput);
+					Debug.Log("Continue");
+					currentInteractable.OnContinueInteraction(currentInput, transform);
 					break;
 
 				case InteractionState.End:
-					currentInteractable.OnEndInteraction(currentInput);
+					Debug.Log("End");
+					currentInteractable.OnEndInteraction(currentInput, transform);
 					currentState = InteractionState.Idle;
 					break;
 

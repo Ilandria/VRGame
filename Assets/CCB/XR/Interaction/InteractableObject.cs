@@ -40,31 +40,31 @@ namespace CCB.XR.Interaction
 			}
 		}
 
-		public void OnBeginInteraction(InputDevice inputDevice)
+		public void OnBeginInteraction(InputDevice inputDevice, Transform inputTransform)
 		{
 			IsInUse = true;
 
 			for (int i = 0; i < beginInteractionsCount; i++)
 			{
-				beginInteractions[i].Raise(inputDevice);
+				beginInteractions[i].Raise(inputDevice, inputTransform);
 			}
 		}
 
-		public void OnContinueInteraction(InputDevice inputDevice)
+		public void OnContinueInteraction(InputDevice inputDevice, Transform inputTransform)
 		{
 			for (int i = 0; i < continueInteractionsCount; i++)
 			{
-				continueInteractions[i].Raise(inputDevice);
+				continueInteractions[i].Raise(inputDevice, inputTransform);
 			}
 		}
 
-		public void OnEndInteraction(InputDevice inputDevice)
+		public void OnEndInteraction(InputDevice inputDevice, Transform inputTransform)
 		{
 			IsInUse = false;
 
 			for (int i = 0; i < endInteractionsCount; i++)
 			{
-				endInteractions[i].Raise(inputDevice);
+				endInteractions[i].Raise(inputDevice, inputTransform);
 			}
 		}
 	}

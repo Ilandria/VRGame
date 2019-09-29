@@ -5,13 +5,10 @@ namespace CCB.XR.Behaviours
 {
 	public class SnapTo : MonoBehaviour
 	{
-		public void Track(InputDevice inputDevice)
+		public void Track(InputDevice inputDevice, Transform inputTransform)
 		{
-			inputDevice.TryGetFeatureValue(CommonUsages.devicePosition, out Vector3 inputPosition);
-			inputDevice.TryGetFeatureValue(CommonUsages.deviceRotation, out Quaternion inputRotation);
-
-			transform.position = inputPosition;
-			transform.rotation = inputRotation;
+			transform.position = inputTransform.position;
+			transform.rotation = inputTransform.rotation;
 		}
 	}
 }

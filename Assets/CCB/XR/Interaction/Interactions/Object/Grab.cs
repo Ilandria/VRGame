@@ -16,13 +16,13 @@ namespace CCB.XR.Interaction.Interactions.Object
 		private bool wasGrabbingBeforeInteraction = false;
 		private bool isGrabbing = false;
 
-		void IBeginInteraction.Raise(InputDevice inputDevice)
+		void IBeginInteraction.Raise(InputDevice inputDevice, Transform inputTransform)
 		{
 			inputDevice.TryGetFeatureValue(CommonUsages.grip, out float grip);
 			wasGrabbingBeforeInteraction = grip >= 0.5f;
 		}
 
-		void IContinueInteraction.Raise(InputDevice inputDevice)
+		void IContinueInteraction.Raise(InputDevice inputDevice, Transform inputTransform)
 		{
 			inputDevice.TryGetFeatureValue(CommonUsages.grip, out float grip);
 
@@ -39,28 +39,28 @@ namespace CCB.XR.Interaction.Interactions.Object
 				{
 					if (grip >= 0.5f)
 					{
-						onContinueGrab.Invoke(inputDevice);
+						onContinueGrab.Invoke(inputDevice, inputTransform);
 					}
 					else
 					{
-						onReleaseGrab.Invoke(inputDevice);
+						onReleaseGrab.Invoke(inputDevice, inputTransform);
 						isGrabbing = false;
 						wasGrabbingBeforeInteraction = false;
 					}
 				}
 				else if (grip >= 0.5f)
 				{
-					onBeginGrab.Invoke(inputDevice);
+					onBeginGrab.Invoke(inputDevice, inputTransform);
 					isGrabbing = true;
 				}
 			}
 		}
 
-		void IEndInteraction.Raise(InputDevice inputDevice)
+		void IEndInteraction.Raise(InputDevice inputDevice, Transform inputTransform)
 		{
 			if (isGrabbing)
 			{
-				onReleaseGrab.Invoke(inputDevice);
+				onReleaseGrab.Invoke(inputDevice, inputTransform);
 				isGrabbing = false;
 			}
 

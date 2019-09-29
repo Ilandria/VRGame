@@ -30,11 +30,11 @@ namespace CCB.XR.Interaction
 			}
 		}
 
-		public void OnGlobalInteraction(InputDevice inputDevice)
+		public void OnGlobalInteraction(InputDevice inputDevice, Transform inputTransform)
 		{
 			for (int i = 0; i < globalInteractionsCount; i++)
 			{
-				globalInteractions[i].Raise(inputDevice);
+				globalInteractions[i].Raise(inputDevice, inputTransform);
 			}
 		}
 	}
